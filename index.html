@@ -16,7 +16,7 @@
 </main><script>
 const pad=n=>String(n).padStart(2,"0"), localDate=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()), today=new Date(), todayKey=localDate(today);
 const oldKey="12frames-"+todayKey, key=d=>"oneframe-"+d;
-let view=new Date(today.getFullYear(),today.getMonth(),1), data=JSON.parse(localStorage.getItem(key(todayKey))||"{}");
+let selectedKey=todayKey, view=new Date(today.getFullYear(),today.getMonth(),1), data=JSON.parse(localStorage.getItem(key(selectedKey))||"{}");
 if(!data.img){try{const old=JSON.parse(localStorage.getItem(oldKey)||"{}");const first=Object.values(old).find(x=>x&&x.img);if(first){data={img:first.img,note:first.note||""};localStorage.setItem(key(todayKey),JSON.stringify(data))}}catch(e){}}
 const fmt=new Intl.DateTimeFormat("ko-KR",{year:"numeric",month:"long",day:"numeric",weekday:"long"}).format(today);document.querySelector("#date").textContent=fmt;
 function save(){localStorage.setItem(key(selectedKey),JSON.stringify(data));renderToday();renderCalendar()}
